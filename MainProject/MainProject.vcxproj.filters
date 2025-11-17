@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="DLL">
+      <UniqueIdentifier>{1632883e-cfcf-4925-bc47-972d723a7429}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scenes">
+      <UniqueIdentifier>{c119b423-7f6f-42cd-be36-6a5994ac46de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework">
+      <UniqueIdentifier>{c2ccbb94-b23f-4b37-94f4-56bae2be0128}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\ToolKit">
+      <UniqueIdentifier>{3e4c6cb7-f072-41e3-9d90-90af3266acbc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\ToolKit\DXTK">
+      <UniqueIdentifier>{87ffda78-2235-49ec-95a9-1f6b413380de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Framework\ToolKit\HEInput">
+      <UniqueIdentifier>{9adc8ffc-5896-4513-91b6-ce0500b04674}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\MainScene.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManagement.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="Resources\resource.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="HuEngine.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="Scenes\DontDestroyOnLoad.h">
+      <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="InputSystem.h">
+      <Filter>Framework</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\cppcoro\cppcoro.h">
+      <Filter>Framework\ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\DirectXTK\Bezier.h">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\DirectXTK\Keyboard.h">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\DirectXTK\Mouse.h">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\DirectXTK\PlatformHelpers.h">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\DirectXTK\SimpleMath.h">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\heGamepad.h">
+      <Filter>Framework\ToolKit\HEInput</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\heRawGamepad.h">
+      <Filter>Framework\ToolKit\HEInput</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\HEToolKit.h">
+      <Filter>Framework\ToolKit</Filter>
+    </ClInclude>
+    <ClInclude Include="HEToolKit\HEMathematics.h">
+      <Filter>Framework\ToolKit</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Framework</Filter>
+    </ClCompile>
+    <ClCompile Include="Scenes\MainScene.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManagement.cpp">
+      <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="HEToolKit\DirectXTK\Keyboard.cpp">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="HEToolKit\DirectXTK\Mouse.cpp">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="HEToolKit\DirectXTK\SimpleMath.cpp">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </ClCompile>
+    <ClCompile Include="HEToolKit\heGamepad.cpp">
+      <Filter>Framework\ToolKit\HEInput</Filter>
+    </ClCompile>
+    <ClCompile Include="HEToolKit\heRawGamepad.cpp">
+      <Filter>Framework\ToolKit\HEInput</Filter>
+    </ClCompile>
+    <ClCompile Include="HEToolKit\HEToolKit.cpp">
+      <Filter>Framework\ToolKit</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="..\Engine\dxcompiler.dll">
+      <Filter>DLL</Filter>
+    </CopyFileToFolders>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resources\resource.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="Resources\hunyan.ico">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="HEToolKit\DirectXTK\SimpleMath.inl">
+      <Filter>Framework\ToolKit\DXTK</Filter>
+    </None>
+  </ItemGroup>
+</Project>
