@@ -112,19 +112,7 @@
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardDistributer.h">
       <Filter>Class\Model</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.h">
-      <Filter>Class\View</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.h">
-      <Filter>Class\View</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerDoubtView.h">
-      <Filter>Class\View</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerHandView.h">
-      <Filter>Class\View</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerTurnView.h">
       <Filter>Class\View</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.h">
@@ -138,6 +126,12 @@
     </ClInclude>
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.h">
       <Filter>Scenes</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.h">
+      <Filter>Class\Presenter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.h">
+      <Filter>Class\Presenter</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -189,19 +183,7 @@
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardDistributer.cpp">
       <Filter>Class\Model</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.cpp">
-      <Filter>Class\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.cpp">
-      <Filter>Class\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerDoubtView.cpp">
-      <Filter>Class\View</Filter>
-    </ClCompile>
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerHandView.cpp">
-      <Filter>Class\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerTurnView.cpp">
       <Filter>Class\View</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.cpp">
@@ -215,6 +197,12 @@
     </ClCompile>
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.cpp">
       <Filter>Scenes</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.cpp">
+      <Filter>Class\Presenter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.cpp">
+      <Filter>Class\Presenter</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

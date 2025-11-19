@@ -29,13 +29,12 @@ void MainScene::Load()
 	m_winnerBGSpriteView.Load("WinnerBack.png", 1100); // 勝者表示の背景スプライトのロード
 	m_winnerTextView.Load(1200, "Fonts/meiryob004.ttf"); // 勝者を表示するテキストビューのロード
 	m_toTitleTextView.Load(1200, "Fonts/meiryob004.ttf"); // タイトルへ戻るテキストビューのロード
-	playerDoubtView_.Load(); 
 	m_doubtJudgeNoBGSpriteView.Load("CardBack2.png", 0); // ダウト判定のカード番号を表示するクラスのロード
 	m_doubtJudgeNoTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号を表示するテキストビューのロード
 	m_doubtJudgeNoGuideTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号のガイドテキストビューのロード
 	bgmManager_.Load(); // BGMを管理するクラスのロード
 	gameLog_.Load(); // ゲームのログを表示するクラスのロード
-	playerTurnView_.Load(); // プレイヤーのターンの案内を表示するクラスのロード
+	m_playerTurnGuideTextView.Load(1000, "Fonts/meiryob004.ttf"); // プレイヤーのターンの案内を表示するテキストビューのロード
 	m_turnPlayerView.Load(1000, "Fonts/meiryob004.ttf"); // ターンのプレイヤーを表示するテキストビューのロード
 	for (int i = 0; i < 4; i++) {
 		m_checkerView[i].Load("Checker.png",0); // チェッカー表示を管理する CheckerView 配列のロード
@@ -45,6 +44,9 @@ void MainScene::Load()
 		m_cardCountTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // カード枚数を表示するテキストビューのロード
 		m_playerNameTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // プレイヤー名を表示するテキストビューのロード
 
+	}
+	for (int i = 0; i < 3; i++) {
+		m_playerDoubtMenuTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // プレイヤーのダウトメニューを表示するテキストビューのロード
 	}
 	discardView_.Load(); // 捨て札を表示するクラスのロード
 	
@@ -70,12 +72,15 @@ void MainScene::Initialize()
 	m_doubtJudgeNoTextView.Initialize(Math::Vector2(800.0f + 75.0f / 2 - 9.0f, 200.0f + 30.0f), 0, 0, 0, L"", 36); // ダウト判定のカード番号を表示するテキストビューの初期化
 	m_doubtJudgeNoGuideTextView.Initialize(Math::Vector2(815.0f, 300.0f), 0, 0, 0, L"Next", 24); // ダウト判定のカード番号のガイドテキストビューの初期化
 	m_turnPlayerView.Initialize(Math::Vector2(900.0f, 50.0f), 0, 0, 0, L"", 36); // ターンのプレイヤーを表示するテキストビューの初期化
-	playerTurnView_.Initialize(); // プレイヤーのターンの案内を表示するクラスの初期化
 	discardView_.Initialize(playerCount_, myPlayerID_); // 捨て札を表示するクラスの初期化
 	CardCountViewInitialize(); // カード枚数表示の初期化
 	m_winnerBGSpriteView.Initialize(Math::Vector2(800.0f, 450.0f), Math::Vector2(800.0f, 450.0f), Math::Vector2(-1000.0f,-1000.0f)); // 勝者表示の背景スプライトの初期化
 	m_winnerTextView.Initialize(Math::Vector2(400.0f, 300.0f), 0, 0, 0, L"", 72); // 勝者を表示するテキストビューの初期化
 	m_toTitleTextView.Initialize(Math::Vector2(420.0f, 500.0f), 0, 0, 0, L"", 48); // タイトルへ戻るテキストビューの初期化
+	m_playerTurnGuideTextView.Initialize(Math::Vector2(430.0f, 400.0f), 0, 0, 0, L"", 36); // プレイヤーのターンの案内を表示するテキストビューの初期化
+	for (int i = 0; i < 3; i++) {
+		m_playerDoubtMenuTextView[i].Initialize(Math::Vector2(600.0f, 380.0f + i * 40.0f), 0, 0, 0, L"", 36); // プレイヤーのダウトメニューを表示するテキストビューの初期化
+	}
 
 	// BGM とチェッカー初期化
 	bgmManager_.PlayBGMFromTop(1); // BGMを再生
@@ -182,14 +187,14 @@ void MainScene::Update(float deltaTime)
 		if (prevTurnPlayerID != turnPlayerID_) {
 			MyPlayerCardSelectReset();
 		}
-		playerTurnView_.ShowPlayerTurnUI();
+		m_playerTurnGuideTextView.UpdateText(L"カードを4枚まで選んで出そう！");
 		MyPlayerCardSelect();
 	}
 	else if (doubtPlayerID_ == myPlayerID_) {
 		MyDoubtSelect();
 	}
 	else {
-		playerTurnView_.HidePlayerTurnUI();
+		m_playerTurnGuideTextView.UpdateText(L"");
 	}
 	prevTurnPlayerID = turnPlayerID_;
 	Scene::Update(deltaTime);
@@ -324,16 +329,16 @@ void MainScene::MyPlayerCardSelectReset()
 
 void MainScene::MyDoubtSelect()
 {
-	playerDoubtView_.ShowDoubtMenu(); // ダウトメニューを表示
+	ShowPlayerDoubtMenu();
 	HE::Gamepad gamepad_ = InputSystem.Gamepad.ElementAtOrDefault(0);
 	if (gamepad_.leftStick.y >= 0.3 || InputSystem.Keyboard.wasPressedThisFrame.Up) {
 
-		playerDoubtView_.HideDoubtMenu(); // ダウトメニューを非表示
+		HidePlayerDoubtMenu(); // ダウトメニューを非表示
 		gameManager_.SetPlayerDoDoubt(true); // ダウトを行う
 	}
 	else if (gamepad_.leftStick.y <= -0.3 || InputSystem.Keyboard.wasPressedThisFrame.Down) {
 
-		playerDoubtView_.HideDoubtMenu(); // ダウトメニューを非表示
+		HidePlayerDoubtMenu(); // ダウトメニューを非表示
 		gameManager_.SetPlayerDoDoubt(false); // ダウトを行わない
 	}
 }
@@ -364,5 +369,19 @@ void MainScene::UpdateDoubtJudgeNoView()
 	else
 	{
 		m_doubtJudgeNoTextView.UpdateText(L""); // 無効な番号の場合は空にする
+	}
+}
+
+void MainScene::ShowPlayerDoubtMenu()
+{
+	m_playerDoubtMenuTextView[0].UpdateText(L"ダウトする?");
+	m_playerDoubtMenuTextView[1].UpdateText(L"↑: ダウト");
+	m_playerDoubtMenuTextView[2].UpdateText(L"↓: スルー");
+}
+
+void MainScene::HidePlayerDoubtMenu()
+{
+	for (int i = 0; i < 3; i++) {
+		m_playerDoubtMenuTextView[i].UpdateText(L"");
 	}
 }

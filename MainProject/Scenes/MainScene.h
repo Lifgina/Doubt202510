@@ -3,9 +3,7 @@
 #include "../HuEngine.h"
 #include "../Class/Model/GameManager.h"
 #include "../Class/View/PlayerHandView.h"
-#include "../Class/View/PlayerDoubtView.h"
 #include "../Class/View/DiscardView.h"
-#include "../Class/View/PlayerTurnView.h"
 #include "../Class/View/GameLog.h"
 #include "../Class/View/TextView.h"
 #include "../Class/View/SpriteView.h"
@@ -38,12 +36,12 @@ private:
 
 	void CardCountViewInitialize();
 	void UpdateDoubtJudgeNoView();
+	void ShowPlayerDoubtMenu();
+	void HidePlayerDoubtMenu();
 
 	GameManager gameManager_;
 	PlayerHandView playerHandView_; // プレイヤーの手札を表示するクラス
-	PlayerDoubtView playerDoubtView_; // ダウトのメニューを表示するクラス
 	DiscardView discardView_; // 捨て札を表示するクラス
-	PlayerTurnView playerTurnView_; // プレイヤーのターンの案内を表示するクラス
 	GameLog gameLog_; // ゲームのログを表示するクラス
 	BGMmanager bgmManager_; // BGMを管理するクラス
 
@@ -60,6 +58,8 @@ private:
 	SpriteView m_winnerBGSpriteView; // 勝者表示の背景スプライトを表示するクラス
 	TextView m_winnerTextView; // 勝者を表示するテキストビュー
 	TextView m_toTitleTextView; // タイトルへ戻るテキストビュー
+	TextView m_playerTurnGuideTextView; // プレイヤーのターンの案内を表示するテキストビュー
+	TextView m_playerDoubtMenuTextView[3]; // プレイヤーのダウトメニューを表示するテキストビュー
 
 
 	int maxCardsOnScreen_ = 25; // 画面上に表示する最大のカード枚数

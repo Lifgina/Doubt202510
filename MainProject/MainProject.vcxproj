@@ -115,9 +115,7 @@
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\BGMmanager.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerDoubtView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerHandView.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerTurnView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.h" />
@@ -150,9 +148,7 @@
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\BGMmanager.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerDoubtView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerHandView.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerTurnView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.cpp" />
