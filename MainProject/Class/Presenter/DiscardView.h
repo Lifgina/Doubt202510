@@ -11,10 +11,10 @@ public:
 
 
 private:
-	int playerCount_;
-	int myPlayerID_; // 自分のプレイヤーID
-	int discardCount_;
-	HE::Sprite cardSprite_[52]; // 捨て札のカードスプライト
-	HE::SpriteFont discardFont_; // 捨て札の枚数を表示するフォント
+	int m_playerCount;
+	int m_myPlayerID; // 自分のプレイヤーID
+	int m_discardCount;
+	HE::Sprite m_cardSprite[52]; // 捨て札のカードスプライト
+	HE::SpriteFont m_discardFont; // 捨て札の枚数を表示するフォント
 
 };

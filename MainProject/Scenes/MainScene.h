@@ -39,11 +39,11 @@ private:
 	void ShowPlayerDoubtMenu();
 	void HidePlayerDoubtMenu();
 
-	GameManager gameManager_;
-	PlayerHandView playerHandView_; // プレイヤーの手札を表示するクラス
-	DiscardView discardView_; // 捨て札を表示するクラス
-	GameLog gameLog_; // ゲームのログを表示するクラス
-	BGMmanager bgmManager_; // BGMを管理するクラス
+	GameManager m_gameManager;
+	PlayerHandView m_playerHandView; // プレイヤーの手札を表示するクラス
+	DiscardView m_discardView; // 捨て札を表示するクラス
+	GameLog m_gameLog; // ゲームのログを表示するクラス
+	BGMmanager m_bgmManager; // BGMを管理するクラス
 
 	SpriteView m_bgSpriteView; // 背景スプライトを表示するクラス
 	SpriteView m_markerView; // マーカーのスプライトを表示するクラス（SpriteViewを利用）
@@ -63,22 +63,22 @@ private:
 	TextView m_gamelogTextView[10]; // ゲームログを表示するテキストビュー
 
 
-	int maxCardsOnScreen_ = 25; // 画面上に表示する最大のカード枚数
+	int m_maxCardsOnScreen = 25; // 画面上に表示する最大のカード枚数
 
-	int playerCount_; // プレイヤーの人数
-	int myPlayerID_; // 自分のプレイヤーID
-	int turnPlayerID_; // 現在のプレイヤーID
-	int doubtPlayerID_; // ダウトを行うプレイヤーのID
-	int winnerID_; // 勝者のプレイヤーID
-	int doubtJudgeNo_; // ダウト判定のカード番号
-	int selectingCardIndex_; // 選択中のカードのインデックス
-	int selectedCardIndex_[4]; // 選択されたカードのインデックス
-	int selectedCardCount_; // 選択されたカードの枚数
-	int prevDiscardCount_ ; // 前回の捨て札の枚数
-	int prevPlayerHands_; // 前フレームのプレイヤーの手札の枚数
-	bool isDiscardTurn_ ; // 捨て札のターンかどうか
-	bool isInputed_; // 入力がされたかどうか
-	bool isPlayedAudio_ ; // オーディオが再生されたかどうか
+	int m_playerCount; // プレイヤーの人数
+	int m_myPlayerID; // 自分のプレイヤーID
+	int m_turnPlayerID; // 現在のプレイヤーID
+	int m_doubtPlayerID; // ダウトを行うプレイヤーのID
+	int m_winnerID; // 勝者のプレイヤーID
+	int m_doubtJudgeNo; // ダウト判定のカード番号
+	int m_selectingCardIndex; // 選択中のカードのインデックス
+	int m_selectedCardIndex[4]; // 選択されたカードのインデックス
+	int m_selectedCardCount; // 選択されたカードの枚数
+	int m_prevDiscardCount; // 前回の捨て札の枚数
+	int m_prevPlayerHands; // 前フレームのプレイヤーの手札の枚数
+	bool m_isDiscardTurn; // 捨て札のターンかどうか
+	bool m_isInputed; // 入力がされたかどうか
+	bool m_isPlayedAudio; // オーディオが再生されたかどうか
 
-	float stickDeadZone_ = 0.2f; // スティックのデッドゾーン
+	float m_stickDeadZone = 0.2f; // スティックのデッドゾーン
 };

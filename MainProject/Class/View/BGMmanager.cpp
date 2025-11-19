@@ -8,20 +8,20 @@ using namespace HE;
 
 void BGMmanager::Load()
 {
-	bgm_[0] = Sound("TitleBGM.wav",Sound::LoopCount::BGM);
-	bgm_[1] = Sound("MainBGM.wav", Sound::LoopCount::BGM);
-	bgm_[2] = Sound("WinBGM.wav", Sound::LoopCount::SE);
+	m_bgm[0] = Sound("TitleBGM.wav",Sound::LoopCount::BGM);
+	m_bgm[1] = Sound("MainBGM.wav", Sound::LoopCount::BGM);
+	m_bgm[2] = Sound("WinBGM.wav", Sound::LoopCount::SE);
 
 }
 
 void BGMmanager::PlayBGMFromTop(int BGMID)
 {
-	if (BGMID < 0 || BGMID >= bgmCount_) {
+	if (BGMID < 0 || BGMID >= m_bgmCount) {
 		return; // 無効なBGMIDの場合は何もしない
 	}
-	if (currentBGMID_ != -1) {
-		bgm_[currentBGMID_].Stop(); // 前のBGMを停止
+	if (m_currentBGMID != -1) {
+		m_bgm[m_currentBGMID].Stop(); // 前のBGMを停止
 	}
 	
-	bgm_[BGMID].PlayFromTop(); // 指定されたBGMを再生
+	m_bgm[BGMID].PlayFromTop(); // 指定されたBGMを再生
 }

@@ -12,5 +12,5 @@ public:
 
 
 private:
-	HE::Sprite playerHandSprites_[52]; // プレイヤーの手札を表示するスプライト
+	HE::Sprite m_playerHandSprites[52]; // プレイヤーの手札を表示するスプライト
 };

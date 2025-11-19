@@ -12,5 +12,5 @@ public:
 
 
 protected:
-	HE::Sprite sprite;
+	HE::Sprite m_sprite;
 };

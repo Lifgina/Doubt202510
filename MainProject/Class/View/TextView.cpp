@@ -8,20 +8,20 @@ using namespace HE;
 
 void TextView::Load(int order, std::string FontAddress)
 {
-	textFont.params.style = Font::AddFontStyle(FontAddress);
-	RenderingPath->AddFont(&textFont, order);
+	m_textFont.params.style = Font::AddFontStyle(FontAddress);
+	RenderingPath->AddFont(&m_textFont, order);
 }
 
 void TextView::Initialize(Math::Vector2 Pos, int RedValue, int GreenValue, int BlueValue, std::wstring InitialText, float Size)
 {
-	textFont.SetText(InitialText);
-	textFont.params.posX = Pos.x;
-	textFont.params.posY = Pos.y;
-	textFont.params.color = Color(RedValue, GreenValue, BlueValue);
-	textFont.params.size = Size;
+	m_textFont.SetText(InitialText);
+	m_textFont.params.posX = Pos.x;
+	m_textFont.params.posY = Pos.y;
+	m_textFont.params.color = Color(RedValue, GreenValue, BlueValue);
+	m_textFont.params.size = Size;
 }
 
 void TextView::UpdateText(std::wstring NewText)
 {
-	textFont.SetText(NewText);
+	m_textFont.SetText(NewText);
 }

@@ -7,29 +7,29 @@ void GameManager::Load() {}
 
 void GameManager::Initialize()
 {
-    myPlayerID_ = 0;
-    discardPlayerID_ = -1;
-    doubtplayerID_ = -1;
-    isDoubt_ = false;
+    m_myPlayerID = 0;
+    m_discardPlayerID = -1;
+    m_doubtPlayerID = -1;
+    m_isDoubt = false;
     for (int i = 0; i < 4; i++) {
-        playerDiscardIndex_[i] = -1;
+        m_playerDiscardIndex[i] = -1;
     }
-    turnPlayerID_ = myPlayerID_;
-    cardDistributer_.DistributeCards(player_, playerCount_);
-    doubtJudgeNo_ = 1;
-    winnerPlayerID_ = -1;
-    isDiscardTurn_ = true;
-    isInputed_ = false;
-    doubtResult_.reset();
-    lastDoubtAction_.reset();
+    m_turnPlayerID = m_myPlayerID;
+    m_cardDistributer.DistributeCards(m_player, m_playerCount);
+    m_doubtJudgeNo = 1;
+    m_winnerPlayerID = -1;
+    m_isDiscardTurn = true;
+    m_isInputed = false;
+    m_doubtResult.reset();
+    m_lastDoubtAction.reset();
 }
 
 void GameManager::Update()
 {
-    if (winnerPlayerID_ != -1) {
+    if (m_winnerPlayerID != -1) {
         return;
     }
-    if (isDiscardTurn_) {
+    if (m_isDiscardTurn) {
         DiscardTurn();
     }
     else {
@@ -38,50 +38,50 @@ void GameManager::Update()
 }
 void GameManager::DiscardTurn()
 {
-    cardDiscarder_.Discard(
-        player_,
-        playerCount_,
-        turnPlayerID_,
-        myPlayerID_,
-        doubtJudgeNo_,
-        playerDiscardIndex_,
-        isInputed_,
-        discardManager_,
-        randomCardSelect_,
-        isInputed_,
-        isDiscardTurn_
+    m_cardDiscarder.Discard(
+        m_player,
+        m_playerCount,
+        m_turnPlayerID,
+        m_myPlayerID,
+        m_doubtJudgeNo,
+        m_playerDiscardIndex,
+        m_isInputed,
+        m_discardManager,
+        m_randomCardSelect,
+        m_isInputed,
+        m_isDiscardTurn
     );
 }
 
 void GameManager::SetPlayerDiscard(int cardIndex[4])
 {
     for (int i = 0; i < 4; ++i) {
-        playerDiscardIndex_[i] = cardIndex[i];
+        m_playerDiscardIndex[i] = cardIndex[i];
     }
-    isInputed_ = true;
+    m_isInputed = true;
 }
 
 void GameManager::DoubtTurn()
 {
-    if (doubtplayerID_ == -1) {
-        doubtplayerID_ = (turnPlayerID_ + 1) % playerCount_;
-        isInputed_ = false;
+    if (m_doubtPlayerID == -1) {
+        m_doubtPlayerID = (m_turnPlayerID + 1) % m_playerCount;
+        m_isInputed = false;
     }
 
-    if (doubtplayerID_ == myPlayerID_) {
-        if (!isInputed_) {
+    if (m_doubtPlayerID == m_myPlayerID) {
+        if (!m_isInputed) {
             return;
         }
     }
-    else if (!isInputed_) {
-        int hands = player_[doubtplayerID_].GetPlayerHands();
+    else if (!m_isInputed) {
+        int hands = m_player[m_doubtPlayerID].GetPlayerHands();
         CardData handcards[52];
         for (int j = 0; j < hands; ++j) {
-            handcards[j] = player_[doubtplayerID_].GetCard(j);
+            handcards[j] = m_player[m_doubtPlayerID].GetCard(j);
         }
         int count = 0;
         for (int j = 0; j < hands; ++j) {
-            if (handcards[j].GetRank() == doubtJudgeNo_) {
+            if (handcards[j].GetRank() == m_doubtJudgeNo) {
                 count++;
             }
         }
@@ -106,52 +106,52 @@ void GameManager::DoubtTurn()
         static std::mt19937 gen(rd());
         std::uniform_real_distribution<float> dist(0.0f, 1.0f);
 
-        isDoubt_ = (dist(gen) < doubtProbability);
-        isInputed_ = true;
+        m_isDoubt = (dist(gen) < doubtProbability);
+        m_isInputed = true;
 
         // 追加: AI/他プレイヤーのダウト/スルー宣言を記録
-        lastDoubtAction_ = std::make_pair(doubtplayerID_, isDoubt_);
+        m_lastDoubtAction = std::make_pair(m_doubtPlayerID, m_isDoubt);
     }
 
-    if (isInputed_) {
-        if (isDoubt_) {
-            bool isSuccess = DoubtCheck(doubtplayerID_, turnPlayerID_);
+    if (m_isInputed) {
+        if (m_isDoubt) {
+            bool isSuccess = DoubtCheck(m_doubtPlayerID, m_turnPlayerID);
             SetDoubtResult(isSuccess);
 
             // ここで直近のダウト宣言者IDを保存
-            lastDoubtPlayerID_ = doubtplayerID_;
+            m_lastDoubtPlayerID = m_doubtPlayerID;
 
             if (isSuccess) {
-                Penalty(turnPlayerID_);
+                Penalty(m_turnPlayerID);
             }
             else {
-                Penalty(doubtplayerID_);
+                Penalty(m_doubtPlayerID);
             }
-            doubtplayerID_ = -1;
-            isDoubt_ = false;
-            isInputed_ = false;
-            if (player_[turnPlayerID_].GetPlayerHands() == 0) {
-                winnerPlayerID_ = turnPlayerID_;
+            m_doubtPlayerID = -1;
+            m_isDoubt = false;
+            m_isInputed = false;
+            if (m_player[m_turnPlayerID].GetPlayerHands() == 0) {
+                m_winnerPlayerID = m_turnPlayerID;
                 return;
             }
-            turnPlayerID_ = (turnPlayerID_ + 1) % playerCount_;
-            doubtJudgeNo_ = (doubtJudgeNo_ % 13) + 1;
-            isDiscardTurn_ = true;
+            m_turnPlayerID = (m_turnPlayerID + 1) % m_playerCount;
+            m_doubtJudgeNo = (m_doubtJudgeNo % 13) + 1;
+            m_isDiscardTurn = true;
             return;
         }
         else {
-            doubtplayerID_ = (doubtplayerID_ + 1) % playerCount_;
-            isInputed_ = false;
-            if (doubtplayerID_ == turnPlayerID_) {
-                doubtplayerID_ = -1;
-                if (player_[turnPlayerID_].GetPlayerHands() == 0) {
-                    winnerPlayerID_ = turnPlayerID_;
+            m_doubtPlayerID = (m_doubtPlayerID + 1) % m_playerCount;
+            m_isInputed = false;
+            if (m_doubtPlayerID == m_turnPlayerID) {
+                m_doubtPlayerID = -1;
+                if (m_player[m_turnPlayerID].GetPlayerHands() == 0) {
+                    m_winnerPlayerID = m_turnPlayerID;
                     return;
                 }
-                turnPlayerID_ = (turnPlayerID_ + 1) % playerCount_;
-                doubtJudgeNo_ = (doubtJudgeNo_ % 13) + 1;
-                discardManager_.ClearCurrentDiscard();
-                isDiscardTurn_ = true;
+                m_turnPlayerID = (m_turnPlayerID + 1) % m_playerCount;
+                m_doubtJudgeNo = (m_doubtJudgeNo % 13) + 1;
+                m_discardManager.ClearCurrentDiscard();
+                m_isDiscardTurn = true;
             }
         }
     }
@@ -159,18 +159,18 @@ void GameManager::DoubtTurn()
 
 void GameManager::SetPlayerDoDoubt(bool isDoubt)
 {
-    isDoubt_ = isDoubt;
-    isInputed_ = true;
+    m_isDoubt = isDoubt;
+    m_isInputed = true;
     // プレイヤーのダウト/スルー宣言も記録
-    lastDoubtAction_ = std::make_pair(myPlayerID_, isDoubt_);
+    m_lastDoubtAction = std::make_pair(m_myPlayerID, isDoubt);
 }
 
 bool GameManager::DoubtCheck(int doubtPlayerID, int discardPlayerID)
 {
     for (int i = 0; i < 4; ++i) {
-        CardData card = discardManager_.GetCurrentDisCards(i);
+        CardData card = m_discardManager.GetCurrentDisCards(i);
         if (card.GetRank() == 0) continue;
-        if (card.GetRank() != doubtJudgeNo_) {
+        if (card.GetRank() != m_doubtJudgeNo) {
             return true;
         }
     }
@@ -180,14 +180,14 @@ bool GameManager::DoubtCheck(int doubtPlayerID, int discardPlayerID)
 void GameManager::Penalty(int penaltyPlayer)
 {
     std::vector<CardData> newHand;
-    int handCount = player_[penaltyPlayer].GetPlayerHands();
+    int handCount = m_player[penaltyPlayer].GetPlayerHands();
     for (int i = 0; i < handCount; ++i) {
-        newHand.push_back(player_[penaltyPlayer].GetCard(i));
+        newHand.push_back(m_player[penaltyPlayer].GetCard(i));
     }
-    for (int i = 0; i < discardManager_.GetDiscardCount(); ++i) {
-        newHand.push_back(discardManager_.GetDiscard(i));
+    for (int i = 0; i < m_discardManager.GetDiscardCount(); ++i) {
+        newHand.push_back(m_discardManager.GetDiscard(i));
     }
-    player_[penaltyPlayer].SetHand(newHand);
-    discardManager_.ClearDiscard();
-    discardManager_.ClearCurrentDiscard();
+    m_player[penaltyPlayer].SetHand(newHand);
+    m_discardManager.ClearDiscard();
+    m_discardManager.ClearCurrentDiscard();
 }

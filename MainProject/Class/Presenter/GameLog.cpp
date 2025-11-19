@@ -8,15 +8,15 @@ using namespace HE;
 
 void GameLog::SetViews(TextView* views, std::size_t count)
 {
-    viewCount_ = (count > 10) ? 10 : count;
-    for (std::size_t i = 0; i < viewCount_; ++i) {
-        views_[i] = &views[i];
+    m_viewCount = (count > 10) ? 10 : count;
+    for (std::size_t i = 0; i < m_viewCount; ++i) {
+        m_views[i] = &views[i];
     }
 
-    logs_.clear();
-    for (std::size_t i = 0; i < viewCount_; ++i) logs_.push_back(L"");
-    for (std::size_t i = 0; i < viewCount_; ++i) {
-        if (views_[i]) views_[i]->UpdateText(logs_[i]);
+    m_logs.clear();
+    for (std::size_t i = 0; i < m_viewCount; ++i) m_logs.push_back(L"");
+    for (std::size_t i = 0; i < m_viewCount; ++i) {
+        if (m_views[i]) m_views[i]->UpdateText(m_logs[i]);
     }
 }
 
@@ -27,13 +27,13 @@ std::wstring GameLog::FormatPlayer(int playerID) const
 
 void GameLog::PushMessage(const std::wstring& msg)
 {
-    logs_.push_front(msg);
-    if (logs_.size() > viewCount_) logs_.pop_back();
+    m_logs.push_front(msg);
+    if (m_logs.size() > m_viewCount) m_logs.pop_back();
 
-    for (std::size_t i = 0; i < viewCount_; ++i) {
-        if (!views_[i]) continue;
-        std::wstring text = (i < logs_.size()) ? logs_[i] : L"";
-        views_[i]->UpdateText(text);
+    for (std::size_t i = 0; i < m_viewCount; ++i) {
+        if (!m_views[i]) continue;
+        std::wstring text = (i < m_logs.size()) ? m_logs[i] : L"";
+        m_views[i]->UpdateText(text);
     }
 }
 

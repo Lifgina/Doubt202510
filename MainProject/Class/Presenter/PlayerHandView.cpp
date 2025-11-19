@@ -9,37 +9,37 @@ using namespace HE;
 void PlayerHandView::Load()
 {
 	for (int i = 0; i < 52; i++) {
-		playerHandSprites_[i]= Sprite("CardsFront.png");
-		RenderingPath->AddSprite(&playerHandSprites_[i], 0); // レンダリングパスに追加
-		playerHandSprites_[i].params.enableDrawRect(Rectf(
+		m_playerHandSprites[i]= Sprite("CardsFront.png");
+		RenderingPath->AddSprite(&m_playerHandSprites[i], 0); // ?????_?????O?p?X????
+		m_playerHandSprites[i].params.enableDrawRect(Rectf(
 			0.0f, 0.0f, 100.0f, 150.0f
 		));
-		playerHandSprites_[i].params.siz = Math::Vector2(100.0f, 150.0f); // カードのサイズを設定
-		playerHandSprites_[i].params.pos = Math::Vector2(-1000.0f, 0.0f); // カードの位置を初期化
+		m_playerHandSprites[i].params.siz = Math::Vector2(100.0f, 150.0f); // ?J?[?h??T?C?Y????
+		m_playerHandSprites[i].params.pos = Math::Vector2(-1000.0f, 0.0f); // ?J?[?h???u???????
 	}
 }
 
 void PlayerHandView::UpdatePlayerHands(PlayerData playerdata_)
 {
-	// プレイヤーの手札を更新
-	int playerHands = playerdata_.GetPlayerHands(); // プレイヤーの手札の枚数を取得
+	// ?v???C???[???D??X?V
+	int playerHands = playerdata_.GetPlayerHands(); // ?v???C???[???D???????擾
 	for (int i = 0; i < 52; i++) {
-		int rank = playerdata_.GetCard(i).GetRank(); // カードのランクを取得
+		int rank = playerdata_.GetCard(i).GetRank(); // ?J?[?h??????N??擾
 		if (rank == 0) {
-			playerHandSprites_[i].params.pos = Math::Vector2(-1000.0f, 0.0f); // カードの位置を初期化
+			m_playerHandSprites[i].params.pos = Math::Vector2(-1000.0f, 0.0f); // ?J?[?h???u???????
 		}
 		else {
 			if (i < 25) {
-				playerHandSprites_[i].params.pos = Math::Vector2(50.0f * i, RenderingPath->GetLogicalHeight() - 200); // カードの位置を設定
+				m_playerHandSprites[i].params.pos = Math::Vector2(50.0f * i, RenderingPath->GetLogicalHeight() - 200); // ?J?[?h???u????
 			}
 			else {
-				playerHandSprites_[i].params.pos = Math::Vector2(50.0f * (i-25), RenderingPath->GetLogicalHeight() - 100); // カードの位置を設定
+				m_playerHandSprites[i].params.pos = Math::Vector2(50.0f * (i-25), RenderingPath->GetLogicalHeight() - 100); // ?J?[?h???u????
 			}
 			
-			int suit = playerdata_.GetCard(i).GetSuit(); // カードのスートを取得
-			playerHandSprites_[i].params.enableDrawRect(Rectf(
+			int suit = playerdata_.GetCard(i).GetSuit(); // ?J?[?h??X?[?g??擾
+			m_playerHandSprites[i].params.enableDrawRect(Rectf(
 				100.0f * (rank - 1), 150.0f * (suit), 100.0f, 150.0f
-			)); // カードの描画矩形を設定
+			)); // ?J?[?h??`???`????
 
 		}
 
@@ -49,9 +49,9 @@ void PlayerHandView::UpdatePlayerHands(PlayerData playerdata_)
 
 Math::Vector2 PlayerHandView::GetCardPosition(int index)
 {
-	// 指定されたインデックスのカードの位置を取得
+	// ?w?????C???f?b?N?X??J?[?h???u??擾
 	if (index < 0 || index >= 52) {
-		return Math::Vector2(-1000.0f, -1000.0f); // 無効なインデックスの場合は画面外の位置を返す
+		return Math::Vector2(-1000.0f, -1000.0f); // ??????C???f?b?N?X???????O???u????
 	}
-	return Math::Vector2(playerHandSprites_[index].params.pos.x, playerHandSprites_[index].params.pos.y); // カードの位置を返す
+	return Math::Vector2(m_playerHandSprites[index].params.pos.x, m_playerHandSprites[index].params.pos.y); // ?J?[?h???u????
 }

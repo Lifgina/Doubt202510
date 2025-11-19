@@ -22,7 +22,7 @@ private:
     void PushMessage(const std::wstring& msg);
     std::wstring FormatPlayer(int playerID) const;
 
-    TextView* views_[10]{};
-    std::size_t viewCount_{ 0 };
-    std::deque<std::wstring> logs_;
+    TextView* m_views[10]{};
+    std::size_t m_viewCount{ 0 };
+    std::deque<std::wstring> m_logs;
 };
