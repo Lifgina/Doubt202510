@@ -133,9 +133,6 @@
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.h">
       <Filter>Class\View</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\WinnerView.h">
-      <Filter>Class\View</Filter>
-    </ClInclude>
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\BGMmanager.h">
       <Filter>Class\View</Filter>
     </ClInclude>
@@ -211,9 +208,6 @@
       <Filter>Class\View</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.cpp">
-      <Filter>Class\View</Filter>
-    </ClCompile>
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\WinnerView.cpp">
       <Filter>Class\View</Filter>
     </ClCompile>
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\BGMmanager.cpp">

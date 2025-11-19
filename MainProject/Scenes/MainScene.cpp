@@ -26,7 +26,9 @@ void MainScene::Load()
 	playerHandView_.Load();
 	m_bgSpriteView.Load("BG.png", -100); // 背景スプライトのロード
 	m_markerView.Load("Marker.png", 0); // マーカースプライトのロード (Marker.png を使用)
-	winnerView_.Load(); 
+	m_winnerBGSpriteView.Load("WinnerBack.png", 1100); // 勝者表示の背景スプライトのロード
+	m_winnerTextView.Load(1200, "Fonts/meiryob004.ttf"); // 勝者を表示するテキストビューのロード
+	m_toTitleTextView.Load(1200, "Fonts/meiryob004.ttf"); // タイトルへ戻るテキストビューのロード
 	playerDoubtView_.Load(); 
 	m_doubtJudgeNoBGSpriteView.Load("CardBack2.png", 0); // ダウト判定のカード番号を表示するクラスのロード
 	m_doubtJudgeNoTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号を表示するテキストビューのロード
@@ -71,6 +73,9 @@ void MainScene::Initialize()
 	playerTurnView_.Initialize(); // プレイヤーのターンの案内を表示するクラスの初期化
 	discardView_.Initialize(playerCount_, myPlayerID_); // 捨て札を表示するクラスの初期化
 	CardCountViewInitialize(); // カード枚数表示の初期化
+	m_winnerBGSpriteView.Initialize(Math::Vector2(800.0f, 450.0f), Math::Vector2(800.0f, 450.0f), Math::Vector2(-1000.0f,-1000.0f)); // 勝者表示の背景スプライトの初期化
+	m_winnerTextView.Initialize(Math::Vector2(400.0f, 300.0f), 0, 0, 0, L"", 72); // 勝者を表示するテキストビューの初期化
+	m_toTitleTextView.Initialize(Math::Vector2(420.0f, 500.0f), 0, 0, 0, L"", 48); // タイトルへ戻るテキストビューの初期化
 
 	// BGM とチェッカー初期化
 	bgmManager_.PlayBGMFromTop(1); // BGMを再生
@@ -153,7 +158,9 @@ void MainScene::Update(float deltaTime)
 	}
 
 	if (winnerID_ != -1) {
-		winnerView_.ShowWinner(winnerID_);
+		m_winnerBGSpriteView.UpdateSpritePos(Math::Vector2(240.0f, 360.0 - 225.0f)); // 勝者表示の背景スプライトを中央に移動
+		m_winnerTextView.UpdateText(L"プレイヤー" + std::to_wstring(winnerID_ + 1) + L"の勝利！");
+		m_toTitleTextView.UpdateText(L"決定ボタンでタイトルへ戻る");
 		if (winnerID_ == myPlayerID_) {
 			if (!isPlayedAudio_) {
 				bgmManager_.PlayBGMFromTop(2); // 勝利した場合、勝利BGMを再生

@@ -120,7 +120,6 @@
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerTurnView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\WinnerView.h" />
     <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.h" />
     <ClInclude Include="HEToolKit\cppcoro\cppcoro.h" />
     <ClInclude Include="HEToolKit\DirectXTK\Bezier.h" />
@@ -156,7 +155,6 @@
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerTurnView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\WinnerView.cpp" />
     <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.cpp" />
     <ClCompile Include="HEToolKit\DirectXTK\Keyboard.cpp" />
     <ClCompile Include="HEToolKit\DirectXTK\Mouse.cpp" />
