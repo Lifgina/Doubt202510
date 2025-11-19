@@ -28,16 +28,21 @@ void MainScene::Load()
 	m_markerView.Load("Marker.png", 0); // マーカースプライトのロード (Marker.png を使用)
 	winnerView_.Load(); 
 	playerDoubtView_.Load(); 
-	doubtJudgeNoView_.Load(); 
+	m_doubtJudgeNoBGSpriteView.Load("CardBack2.png", 0); // ダウト判定のカード番号を表示するクラスのロード
+	m_doubtJudgeNoTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号を表示するテキストビューのロード
+	m_doubtJudgeNoGuideTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号のガイドテキストビューのロード
 	bgmManager_.Load(); // BGMを管理するクラスのロード
 	gameLog_.Load(); // ゲームのログを表示するクラスのロード
 	playerTurnView_.Load(); // プレイヤーのターンの案内を表示するクラスのロード
-	turnPlayerView_.Load(); // 現在の手番のプレイヤーを表示するクラスのロード
+	m_turnPlayerView.Load(1000, "Fonts/meiryob004.ttf"); // ターンのプレイヤーを表示するテキストビューのロード
 	for (int i = 0; i < 4; i++) {
-		checkerView_[i].Load(); 
+		m_checkerView[i].Load("Checker.png",0); // チェッカー表示を管理する CheckerView 配列のロード
 	}
 	for  (int i = 0; i < 4; i++) {
-		cardCountView_[i].Load(); // カードの枚数を表示するクラスのロード
+		m_cardCountBGSpriteView[i].Load("CardBack2.png", 0); // カード枚数表示の背景スプライトのロード
+		m_cardCountTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // カード枚数を表示するテキストビューのロード
+		m_playerNameTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // プレイヤー名を表示するテキストビューのロード
+
 	}
 	discardView_.Load(); // 捨て札を表示するクラスのロード
 	
@@ -55,21 +60,57 @@ void MainScene::Initialize()
 	gameManager_.SetPlayerCount(playerCount_); // プレイヤーの人数を設定
 	gameManager_.Initialize();
 	playerHandView_.UpdatePlayerHands(gameManager_.GetPlayerData(myPlayerID_)); // 自分の手札を更新
-	m_bgSpriteView.Initialize(Math::Vector2(1280.0f,720.0f),Math::Vector2(1280.0f,720.0f),Math::Vector2(0.0f, 0.0f)); // 背景スプライトの初期化
-	m_markerView.Initialize(Math::Vector2(25.0f, 25.0f),Math::Vector2(50.0f,50.0f),Math::Vector2(-1000.0f, 0.0f));
-	doubtJudgeNoView_.Initialize(); 
-	turnPlayerView_.Initialize(); // 現在の手番のプレイヤーを表示するクラスの初期化
+
+	// 背景およびマーカー初期化
+	m_bgSpriteView.Initialize(Math::Vector2(1280.0f,720.0f), Math::Vector2(1280.0f,720.0f), Math::Vector2(0.0f, 0.0f)); // 背景スプライトの初期化
+	m_markerView.Initialize(Math::Vector2(25.0f, 25.0f), Math::Vector2(50.0f,50.0f), Math::Vector2(-1000.0f, 0.0f));
+	m_doubtJudgeNoBGSpriteView.Initialize(Math::Vector2(75.0f, 100.0f), Math::Vector2(1250.0f, 1935.0f), Math::Vector2(800.0f, 200.0f)); // ダウト判定のカード番号を表示するクラスの初期化
+	m_doubtJudgeNoTextView.Initialize(Math::Vector2(800.0f + 75.0f / 2 - 9.0f, 200.0f + 30.0f), 0, 0, 0, L"", 36); // ダウト判定のカード番号を表示するテキストビューの初期化
+	m_doubtJudgeNoGuideTextView.Initialize(Math::Vector2(815.0f, 300.0f), 0, 0, 0, L"Next", 24); // ダウト判定のカード番号のガイドテキストビューの初期化
+	m_turnPlayerView.Initialize(Math::Vector2(900.0f, 50.0f), 0, 0, 0, L"", 36); // ターンのプレイヤーを表示するテキストビューの初期化
 	playerTurnView_.Initialize(); // プレイヤーのターンの案内を表示するクラスの初期化
 	discardView_.Initialize(playerCount_, myPlayerID_); // 捨て札を表示するクラスの初期化
-	cardCountView_[0].Initialize(Math::Vector2(800.0f,380.0f)); 
-	cardCountView_[1].Initialize(Math::Vector2(10.0, 150.0f));
-	cardCountView_[2].Initialize(Math::Vector2(400.0f, 10.0f));
-	cardCountView_[3].Initialize(Math::Vector2(1170.0f, 150.0f));
+	CardCountViewInitialize(); // カード枚数表示の初期化
+
+	// BGM とチェッカー初期化
 	bgmManager_.PlayBGMFromTop(1); // BGMを再生
-	for (int i = 0; i < playerCount_; i++) {
-		cardCountView_[i].SetPlayerID(i); // プレイヤーのIDを設定
+	for (int i = 0; i < 4; i++) {
+		m_checkerView[i].Initialize(Math::Vector2(25.0f, 25.0f), Math::Vector2(50.0f, 50.0f), Math::Vector2(-1000.0f, 0.0f)); // チェッカー表示を管理する CheckerView 配列の初期化
 	}
 	MyPlayerCardSelectReset();
+}
+
+void MainScene::CardCountViewInitialize()
+{
+	// プレイヤー毎の UI をループで初期化（重複コードを削減）
+	const HE::Math::Vector2 cardBGSize(75.0f, 100.0f);
+	const HE::Math::Vector2 cardBGRect(1250.0f, 1935.0f);
+	const std::array<HE::Math::Vector2, 4> cardBGPositions = {
+		HE::Math::Vector2(800.0f, 380.0f),
+		HE::Math::Vector2(10.0f, 150.0f),
+		HE::Math::Vector2(400.0f, 10.0f),
+		HE::Math::Vector2(1170.0f, 150.0f)
+	};
+	const std::array<std::wstring, 4> playerNames = {
+		L"プレイヤー1", L"プレイヤー2", L"プレイヤー3", L"プレイヤー4"
+	};
+	const float nameOffsetX = -5.0f;
+	const float nameOffsetY = 100.0f;
+	const float cardCountTextOffsetX = (cardBGSize.x / 2.0f) - 18.0f;
+	const float cardCountTextOffsetY = (cardBGSize.y / 2.0f) - 18.0f;
+
+	for (int i = 0; i < playerCount_ && i < 4; ++i) {
+		// 背景スプライト初期化
+		m_cardCountBGSpriteView[i].Initialize(cardBGSize, cardBGRect, cardBGPositions[i]);
+
+		// プレイヤー名テキスト位置（背景位置を基準にオフセット）
+		HE::Math::Vector2 namePos(cardBGPositions[i].x + nameOffsetX, cardBGPositions[i].y + nameOffsetY);
+		m_playerNameTextView[i].Initialize(namePos, 0.0f, 0.0f, 0.0f, playerNames[i], 24);
+
+		// カード枚数テキスト位置を背景中心付近に配置
+		HE::Math::Vector2 countPos(cardBGPositions[i].x + cardCountTextOffsetX, cardBGPositions[i].y + cardCountTextOffsetY);
+		m_cardCountTextView[i].Initialize(countPos, 0.0f, 0.0f, 0.0f, L"0", 36);
+	}
 }
 
 // releasing resources required for termination.
@@ -85,11 +126,11 @@ void MainScene::Update(float deltaTime)
 	gameManager_.Update();
 	MonitorGameManager();
 	MonitorDiscard();
-	turnPlayerView_.UpdateTurnPlayerView(turnPlayerID_);
+	m_turnPlayerView.UpdateText(L"プレイヤー"+std::to_wstring(turnPlayerID_+1)+L"の番");
 	for (int i = 0; i < 4; i++) {
-		cardCountView_[i].UpdateCardcount(gameManager_.GetPlayerData(i).GetPlayerHands());
+		m_cardCountTextView[i].UpdateText(std::to_wstring(gameManager_.GetPlayerData(i).GetPlayerHands())); // 各プレイヤーのカード枚数を更新
 	}
-	doubtJudgeNoView_.UpdateDoubtJudgeNo(doubtJudgeNo_);
+	UpdateDoubtJudgeNoView();
 
 	// ★ ダウト/スルー宣言ログ（宣言者IDを正しく渡す）
 	auto lastDoubtAction = gameManager_.GetLastDoubtAction();
@@ -228,7 +269,7 @@ void MainScene::MyPlayerCardSelect()
 		// 既に選択されているカードでない場合、選択されたカードのインデックスを保存
 
 		if (!isAlreadySelected && selectedCardCount_ < 4) {
-			checkerView_[selectedCardCount_].UpdateChecker(playerHandView_.GetCardPosition(selectingCardIndex_)); // チェッカーの位置を更新
+			m_checkerView[selectedCardCount_].UpdateSpritePos(playerHandView_.GetCardPosition(selectingCardIndex_)); // チェッカーの位置を更新
 			selectedCardIndex_[selectedCardCount_] = selectingCardIndex_; // 選択されたカードのインデックスを保存
 			selectedCardCount_++; // 選択されたカードの枚数を増やす
 		}
@@ -238,9 +279,9 @@ void MainScene::MyPlayerCardSelect()
 				if (selectedCardIndex_[i] == selectingCardIndex_) {
 					// 最後のチェッカーを現在の位置に移動
 					if (i != selectedCardCount_ - 1) {
-						checkerView_[i].UpdateChecker(playerHandView_.GetCardPosition(selectedCardIndex_[selectedCardCount_ - 1]));
+						m_checkerView[i].UpdateSpritePos(playerHandView_.GetCardPosition(selectedCardIndex_[selectedCardCount_ - 1]));
 					}
-					checkerView_[selectedCardCount_ - 1].CheckerDelete(); // 最後のチェッカーを削除
+					m_checkerView[selectedCardCount_ - 1].UpdateSpritePos(Math::Vector2(-1000.0f, 0.0f)); // チェッカーを画面外に移動
 
 					// 配列も最後の要素で上書き
 					selectedCardIndex_[i] = selectedCardIndex_[selectedCardCount_ - 1];
@@ -256,7 +297,7 @@ void MainScene::MyPlayerCardSelect()
 	{
 		playerHandView_.UpdatePlayerHands(gameManager_.GetPlayerData(myPlayerID_)); // 自分の手札を更新
 		for (int i = 0; i < 4; i++) {
-			checkerView_[i].CheckerDelete(); // チェッカーを削除
+			m_checkerView[i].UpdateSpritePos(Math::Vector2(-1000.0f, 0.0f)); // チェッカーを画面外に移動
 		}
 		gameManager_.SetPlayerDiscard(selectedCardIndex_); // 選択されたカードを捨て札に設定
 	}
@@ -290,3 +331,31 @@ void MainScene::MyDoubtSelect()
 	}
 }
 
+void MainScene::UpdateDoubtJudgeNoView()
+{
+
+	if (2 <= doubtJudgeNo_ && doubtJudgeNo_ <= 10)
+	{
+		m_doubtJudgeNoTextView.UpdateText(std::to_wstring(doubtJudgeNo_)); // ダウト判定のカード番号を表示
+	}
+	else if (doubtJudgeNo_ == 11)
+	{
+		m_doubtJudgeNoTextView.UpdateText(L"J"); // ジャックの場合
+	}
+	else if (doubtJudgeNo_ == 12)
+	{
+		m_doubtJudgeNoTextView.UpdateText(L"Q"); // クイーンの場合
+	}
+	else if (doubtJudgeNo_ == 13)
+	{
+		m_doubtJudgeNoTextView.UpdateText(L"K"); // キングの場合
+	}
+	else if (doubtJudgeNo_ == 1)
+	{
+		m_doubtJudgeNoTextView.UpdateText(L"A"); // エースの場合
+	}
+	else
+	{
+		m_doubtJudgeNoTextView.UpdateText(L""); // 無効な番号の場合は空にする
+	}
+}
