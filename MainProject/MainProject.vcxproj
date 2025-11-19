@@ -105,20 +105,19 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardData.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardDiscarder.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardDistributer.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\DiscardManager.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\GameManager.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\PlayerData.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\RandomCardSelect.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\BGMmanager.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerHandView.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.h" />
-    <ClInclude Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.h" />
+    <ClInclude Include="Class\Model\CardData.h" />
+    <ClInclude Include="Class\Model\CardDiscarder.h" />
+    <ClInclude Include="Class\Model\CardDistributer.h" />
+    <ClInclude Include="Class\Model\DiscardManager.h" />
+    <ClInclude Include="Class\Model\GameManager.h" />
+    <ClInclude Include="Class\Model\PlayerData.h" />
+    <ClInclude Include="Class\Model\RandomCardSelect.h" />
+    <ClInclude Include="Class\Presenter\DiscardView.h" />
+    <ClInclude Include="Class\Presenter\GameLog.h" />
+    <ClInclude Include="Class\Presenter\PlayerHandView.h" />
+    <ClInclude Include="Class\View\BGMmanager.h" />
+    <ClInclude Include="Class\View\SpriteView.h" />
+    <ClInclude Include="Class\View\TextView.h" />
     <ClInclude Include="HEToolKit\cppcoro\cppcoro.h" />
     <ClInclude Include="HEToolKit\DirectXTK\Bezier.h" />
     <ClInclude Include="HEToolKit\DirectXTK\Keyboard.h" />
@@ -135,23 +134,23 @@
     <ClInclude Include="SceneManagement.h" />
     <ClInclude Include="Scenes\DontDestroyOnLoad.h" />
     <ClInclude Include="Scenes\MainScene.h" />
+    <ClInclude Include="Scenes\TitleScene.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardDiscarder.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\CardDistributer.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\DiscardManager.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\GameManager.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\PlayerData.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\Model\RandomCardSelect.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\BGMmanager.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\DiscardView.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\GameLog.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\PlayerHandView.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\SpriteView.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Class\View\TextView.cpp" />
-    <ClCompile Include="..\..\..\Doubt202510\Doubt202510\MainProject\Scenes\TitleScene.cpp" />
+    <ClCompile Include="Class\Model\CardDiscarder.cpp" />
+    <ClCompile Include="Class\Model\CardDistributer.cpp" />
+    <ClCompile Include="Class\Model\DiscardManager.cpp" />
+    <ClCompile Include="Class\Model\GameManager.cpp" />
+    <ClCompile Include="Class\Model\PlayerData.cpp" />
+    <ClCompile Include="Class\Model\RandomCardSelect.cpp" />
+    <ClCompile Include="Class\Presenter\DiscardView.cpp" />
+    <ClCompile Include="Class\Presenter\GameLog.cpp" />
+    <ClCompile Include="Class\Presenter\PlayerHandView.cpp" />
+    <ClCompile Include="Class\View\BGMmanager.cpp" />
+    <ClCompile Include="Class\View\SpriteView.cpp" />
+    <ClCompile Include="Class\View\TextView.cpp" />
     <ClCompile Include="HEToolKit\DirectXTK\Keyboard.cpp" />
     <ClCompile Include="HEToolKit\DirectXTK\Mouse.cpp" />
     <ClCompile Include="HEToolKit\DirectXTK\SimpleMath.cpp" />
@@ -167,6 +166,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Use</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Scenes\MainScene.cpp" />
+    <ClCompile Include="Scenes\TitleScene.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

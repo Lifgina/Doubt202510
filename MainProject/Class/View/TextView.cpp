@@ -12,7 +12,7 @@ void TextView::Load(int order, std::string FontAddress)
 	RenderingPath->AddFont(&textFont, order);
 }
 
-void TextView::Initialize(Math::Vector2 Pos, int RedValue, int GreenValue, int BlueValue, std::string InitialText, float Size)
+void TextView::Initialize(Math::Vector2 Pos, int RedValue, int GreenValue, int BlueValue, std::wstring InitialText, float Size)
 {
 	textFont.SetText(InitialText);
 	textFont.params.posX = Pos.x;
@@ -21,7 +21,7 @@ void TextView::Initialize(Math::Vector2 Pos, int RedValue, int GreenValue, int B
 	textFont.params.size = Size;
 }
 
-void TextView::UpdateText(std::string NewText)
+void TextView::UpdateText(std::wstring NewText)
 {
 	textFont.SetText(NewText);
 }

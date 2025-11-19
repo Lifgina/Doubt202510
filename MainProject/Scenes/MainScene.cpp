@@ -33,7 +33,6 @@ void MainScene::Load()
 	m_doubtJudgeNoTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号を表示するテキストビューのロード
 	m_doubtJudgeNoGuideTextView.Load(1000, "Fonts/meiryob004.ttf"); // ダウト判定のカード番号のガイドテキストビューのロード
 	bgmManager_.Load(); // BGMを管理するクラスのロード
-	gameLog_.Load(); // ゲームのログを表示するクラスのロード
 	m_playerTurnGuideTextView.Load(1000, "Fonts/meiryob004.ttf"); // プレイヤーのターンの案内を表示するテキストビューのロード
 	m_turnPlayerView.Load(1000, "Fonts/meiryob004.ttf"); // ターンのプレイヤーを表示するテキストビューのロード
 	for (int i = 0; i < 4; i++) {
@@ -48,6 +47,10 @@ void MainScene::Load()
 	for (int i = 0; i < 3; i++) {
 		m_playerDoubtMenuTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // プレイヤーのダウトメニューを表示するテキストビューのロード
 	}
+	for (int i = 0; i < 10; i++) {
+		m_gamelogTextView[i].Load(1000, "Fonts/meiryob004.ttf"); // ゲームログを表示するテキストビューのロード
+	}
+	gameLog_.SetViews(m_gamelogTextView, 10);
 	discardView_.Load(); // 捨て札を表示するクラスのロード
 	
 
@@ -80,6 +83,9 @@ void MainScene::Initialize()
 	m_playerTurnGuideTextView.Initialize(Math::Vector2(430.0f, 400.0f), 0, 0, 0, L"", 36); // プレイヤーのターンの案内を表示するテキストビューの初期化
 	for (int i = 0; i < 3; i++) {
 		m_playerDoubtMenuTextView[i].Initialize(Math::Vector2(600.0f, 380.0f + i * 40.0f), 0, 0, 0, L"", 36); // プレイヤーのダウトメニューを表示するテキストビューの初期化
+	}
+	for (int i = 0; i < 10; i++) {
+		m_gamelogTextView[i].Initialize(Math::Vector2(1000.0f, 275.0f + i * 20.0f), 0, 0, 0, L"", 20); // ゲームログを表示するテキストビューの初期化
 	}
 
 	// BGM とチェッカー初期化

@@ -2,9 +2,9 @@
 
 #include "../HuEngine.h"
 #include "../Class/Model/GameManager.h"
-#include "../Class/View/PlayerHandView.h"
-#include "../Class/View/DiscardView.h"
-#include "../Class/View/GameLog.h"
+#include "../Class/Presenter/PlayerHandView.h"
+#include "../Class/Presenter/DiscardView.h"
+#include "../Class/Presenter/GameLog.h"
 #include "../Class/View/TextView.h"
 #include "../Class/View/SpriteView.h"
 #include "../Class/View/BGMmanager.h"
@@ -60,6 +60,7 @@ private:
 	TextView m_toTitleTextView; // タイトルへ戻るテキストビュー
 	TextView m_playerTurnGuideTextView; // プレイヤーのターンの案内を表示するテキストビュー
 	TextView m_playerDoubtMenuTextView[3]; // プレイヤーのダウトメニューを表示するテキストビュー
+	TextView m_gamelogTextView[10]; // ゲームログを表示するテキストビュー
 
 
 	int maxCardsOnScreen_ = 25; // 画面上に表示する最大のカード枚数
